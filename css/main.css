@@ -1,0 +1,325 @@
+/*default init */
+@charset "UTF-8";
+@import "fontawesome/css/all.min.css";
+@font-face {
+	src:url('NotoSansKR-Black.otf');
+	font-family: "noto";
+	font-weight: 700;
+}
+
+@font-face {
+	src:url('NotoSansKR-Bold.otf');
+	font-family: "noto";
+	font-weight: 500;
+}
+
+@font-face {
+	src:url('NotoSansKR-Medium.otf');
+	font-family: "noto";
+	font-weight: 400;
+}
+
+@font-face {
+	src:url('NotoSansKR-Regular.otf');
+	font-family: "noto";
+	font-weight: 300;
+}
+
+@font-face {
+	src:url('NotoSansKR-Light.otf');
+	font-family: "noto";
+	font-weight: 200;
+}
+
+@font-face {
+	src:url('NotoSansKR-Thin.otf');
+	font-family: "noto";
+	font-weight: 100;
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'noto';
+	font-weight: 400;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+li {
+	list-style: none;
+}
+
+.div-wrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+/* default init */
+
+/* header */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    min-width: 1340px;
+    width: 100%;
+    min-height: 90px;
+    border-bottom: 1px solid #fff7;
+}
+
+nav {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+nav > ul {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+/*nav > ul::after {
+	content: '';
+	display: block;
+	clear: both;
+}*/
+
+nav > ul > li {
+	/*float: left;*/
+    min-width: 150px;
+    text-align: center;
+}
+
+nav > ul > li > strong {
+    display: block;
+    padding: 34px 70px;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+}
+
+nav > ul > li > strong > span {
+	position: relative;
+	display: block;
+}
+
+nav > ul > li > strong > span::after {
+	content: '';
+    position: absolute;
+    top: 53px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: #295ebe;
+    transform: translateX(-50%);
+}
+
+nav > ul > li:hover > strong > span::after {
+	width: 100%;
+	transition: width .5s ease-in-out;
+}
+
+nav > ul > li:hover > strong {
+	color: #295ebe !important;
+}
+
+nav > ul > li > ul {
+	display: none;
+	padding: 30px 0;
+}
+
+nav > ul > li > ul > li {
+	padding: 10px 0;
+}
+
+nav > ul > li > ul > li > a:hover {
+	color: #295ebe !important;
+}
+
+nav > ul:hover > li > strong {
+	color: #000;
+}
+
+nav > ul:hover > li > ul {
+	display: block;
+}
+
+header.header-hover > nav > ul {
+	background-color: #fffc;
+}
+
+
+.header-hover::before {
+	content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 89px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+#logo {
+	font-size: 1.6em;
+	font-weight: 500;
+	color: #fff;
+	position: absolute;
+	top: 27px;
+	/*top: 50%;*/
+	/*transform: translateY(-50%);*/
+	left: 100px;
+}
+
+#logo.logo-hover {
+	color: #295ebe;
+}
+
+
+/* header  */
+
+
+/* section admin */
+.sec {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+}
+
+/* section admin */
+
+/* slider section */
+
+
+.slider {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.slider > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: scale(1.0);
+	filter: brightness(80%);
+	z-index: -1;
+	display: none;
+}
+
+.slider-container {
+	width: 70%;
+	height: 100%;
+	position: relative;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	z-index: 2;
+}
+
+.slider-title {
+	color: #fff;
+	font-size: 50px;
+	font-weight: 100;
+	transform: translateY(0px);
+}
+
+.slider-title-bold {
+	color: #fff;
+	font-size: 60px;
+	font-weight: 500;
+}
+
+.slider-circles {
+	display: flex;
+	position: absolute;
+	bottom: 300px;
+	margin-top: 10px;
+	z-index: 1;
+}
+
+.slider-circle {
+	width: 10px;
+	height: 10px;
+	border:1px solid #fff;
+	border-radius: 100%;
+	margin: 0 3px;
+}
+
+.slider-circle.active {
+	background-color: #fff;
+}
+
+.mouse {
+	width: 20px;
+	height: 34px;
+	border:2px solid #fff;
+	border-radius: 10px;
+	position: absolute;
+	bottom: 200px;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 2px;
+    height: 8px;
+    background-color: #fff;
+    animation: mouse 1.3s infinite ease-in-out;
+}
+
+@keyframes mouse {
+	from {
+		height: 1px;
+	}
+
+	to {
+		height: 8px;
+	}
+}
+
+.controller {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	top: 50%;
+	transform: translateY(-50%,-50%);
+}
+
+.controller > button {
+	width: 40px;
+	height: 80px;
+	background-color: #0003;
+	outline: none;
+	cursor: pointer;
+	border:none;
+	color: #fff;
+	z-index: 1;
+}
+
+/* slider section */
