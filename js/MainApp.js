@@ -7,6 +7,11 @@ class MainApp {
 		];
 		this.isSliding = false;
 		this.nowIdx = 0;
+		this.preScroll = 0;
+		this.scrollIdx = 0;
+		this.isScrolling = false;
+		this.screenHeight = $(window).height();
+
 		this.init();
 	}
 
@@ -14,6 +19,13 @@ class MainApp {
 		this.resetInterval();
 		this.addEvent();
 		this.slideImg();
+		this.showWeb();
+	}
+
+	showWeb(){
+		let date = new Date();
+		let txt = `${date.getFullYear()}/${(date.getMonth()+1+"").padStart(2,"0")}/${(date.getDate()+"").padStart(2,"0")} ${(date.getHours()+"").padStart(2,"0")}:${(date.getMinutes()+"").padStart(2,"0")}:${(date.getSeconds()+"").padStart(2,"0")}`;
+		$(".about-stock-date").html(txt);
 	}
 
 	resetInterval(){
@@ -65,9 +77,74 @@ class MainApp {
 		$("nav > ul").hover(this.headerHoverOn,this.headerHoverOut);
 		$(".controller > button").on("click", this.slideBtnClick);
 		$(".slider-circle").on('click', this.slideCircleClick);
+		document.querySelector("html,body").addEventListener("mousewheel", this.scrollEvent,{passive:false});
+		window.addEventListener("keydown",this.windowKeydown);
+		$(window).on("resize",this.resizeWindow);
+		$(".support-icon").hover(this.iconHoverOn,this.iconHoverOut);
 	}
 
-	slideCircleClick =  e=> {
+	iconHoverOn = e => {
+		$(".support-icon").css({opacity:0.6});
+		$(e.currentTarget).css({opacity:1});
+	}
+
+	iconHoverOut = e => {
+		$(".support-icon").css({opacity:1});
+	}
+
+	windowKeydown = e => {
+		if(e.keyCode >= 32 && e.keyCode <= 40){
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	}
+
+	resizeWindow =  e => {
+		this.screenHeight = $(window).height();
+	}
+
+	scrollEvent = e =>{
+		e.preventDefault();
+		e.stopPropagation();
+		if(this.isScrolling) return;
+		this.isScrolling = true;
+		let down = e.deltaY > 0;
+
+		this.scrollIdx += down ? 1 : -1;
+		if(this.scrollIdx >= 3) this.scrollIdx = 2;
+		if(this.scrollIdx <= 0) this.scrollIdx = 0;
+
+		if(this.scrollIdx == 1) this.aboutAnimation();
+		if(this.scrollIdx == 2) this.iconsRotateAnimation();
+		else $(".support-icon > img").css({transform : `rotateY(0deg)`});
+
+		if(this.scrollIdx != 0) $("header").addClass("is-sticky");
+		else $("header").removeClass("is-sticky");
+
+
+
+		let top = this.scrollIdx * this.screenHeight;
+		$("html,body").animate({scrollTop:top},500,(e)=>{
+			this.isScrolling = false;
+		});
+	}
+
+	iconsRotateAnimation(){
+		$(".support-icon > img").css({transform : `rotateY(360deg)`});
+	}
+
+	aboutAnimation(){
+		$(".about-animate").each((idx,dom)=>{
+			this.animateDomAbout($(dom),idx*100);
+		});
+	}
+
+	animateDomAbout(dom,delay){
+		dom.css({top:`${50+delay}px`,opacity:0.5});
+		setTimeout(()=>{dom.animate({top:0,opacity:1},1000)},delay);
+	}
+
+	slideCircleClick = e=> {
 		if(this.isSliding) return;
 		this.nowIdx = e.currentTarget.dataset.idx;
 		this.slideImg();
