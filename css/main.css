@@ -667,3 +667,11 @@ footer {
 	font-size: 14px;
 	font-weight: 300;
 }
+
+.footer-img {
+	position: absolute;
+	right: 0;
+	font-size: 120px;
+	top: 50%;
+	transform: translateY(-50%);
+}
